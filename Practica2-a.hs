@@ -11,12 +11,12 @@ import Verificacion
 -- Cláusulas --
 -- ---------------------------------------------------------------------
 -- ---------------------------------------------------------------------
--- Ejercicio 1: Definir el tipo de datos Cláusula como una lista de
+-- Definir el tipo de datos Cláusula como una lista de
 -- literales.
 -- ---------------------------------------------------------------------
 type Cláusula = [Literal]
 -- ---------------------------------------------------------------------
--- Ejercicio 2: Definir la función
+-- Definir la función
 -- cláusula :: Prop -> Cláusula
 -- tal que (cláusula f) es la cláusula de la fórmula-clausal f. Por
 -- ejemplo,
@@ -29,7 +29,7 @@ cláusula f
 | literal f = [f]
 cláusula (Disj f g) = sort ((cláusula f) `union` (cláusula g))
 -- ---------------------------------------------------------------------
--- Ejercicio 3: Definir la función
+-- Definir la función
 -- cláusulasFNC :: Prop -> [Cláusula]
 -- tal que (cláusulasFNC f) es el conjunto de cláusulas de la fórmula en
 -- forma normal conjuntiva f. Por ejmplo,
