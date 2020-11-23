@@ -44,7 +44,6 @@ cláusulasFNC (Conj f g) =
 cláusulasFNC f =
 [cláusula f]
 -- ---------------------------------------------------------------------
--- Ejercicio 4: Definir la función
 -- cláusulas :: Prop -> [Cláusula]
 -- tal que (cláusulas f) es un conjunto de cláusulas equivalente a
 -- f. Por ejemplo,
@@ -54,8 +53,7 @@ cláusulasFNC f =
 -- ==> [[q,-p],[-p,-r]]
 -- cláusulas (no(p <--> r))
 -- ==> [[p,r],[p,no p],[r,no r],[no p,no r]]
--- ---------------------------------------------------------------------
-Capítulo 3. Cláusulas 
+-- --------------------------------------------------------------------- 
 cláusulas :: Prop -> [Cláusula]
 cláusulas f =
 cláusulasFNC (formaNormalConjuntiva f)
