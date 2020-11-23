@@ -19,8 +19,6 @@ type Cláusula = [Literal]
 -- Ejercicio 2: Definir la función
 -- cláusula :: Prop -> Cláusula
 -- tal que (cláusula f) es la cláusula de la fórmula-clausal f. Por
-29
-
 -- ejemplo,
 -- cláusula p ==> [p]
 -- cláusula (no p) ==> [no p]
@@ -57,7 +55,7 @@ cláusulasFNC f =
 -- cláusulas (no(p <--> r))
 -- ==> [[p,r],[p,no p],[r,no r],[no p,no r]]
 -- ---------------------------------------------------------------------
-Capítulo 3. Cláusulas 31
+Capítulo 3. Cláusulas 
 cláusulas :: Prop -> [Cláusula]
 cláusulas f =
 cláusulasFNC (formaNormalConjuntiva f)
@@ -65,7 +63,6 @@ cláusulasFNC (formaNormalConjuntiva f)
 -- Cláusulas de un conjunto de fórmulas --
 -- ---------------------------------------------------------------------
 -- ---------------------------------------------------------------------
--- Ejercicio 5: Definir la función
 -- cláusulasConjunto :: [Prop] -> [Cláusula]
 -- tal que (cláusulasConjunto s) es un conjunto de cláusulas equivalente
 -- a s. Por ejemplo,
@@ -79,7 +76,6 @@ uniónGeneral [cláusulas f | f <- s]
 -- Símbolos proposicionales de una cláusula --
 -- ---------------------------------------------------------------------
 -- ---------------------------------------------------------------------
--- Ejercicio 6: Definir la función
 -- símbolosProposicionalesCláusula :: Cláusula -> [Prop]
 -- tal que (símbolosProposicionalesCláusula c) es el conjunto de los
 -- símbolos proposicionales de c. Por ejemplo,
@@ -91,7 +87,6 @@ símbolosProposicionalesCláusula = símbolosPropConj
 -- Símbolos proposicionales de un conjunto de cláusulas --
 -- ---------------------------------------------------------------------
 -- ---------------------------------------------------------------------
--- Ejercicio 7: Definir la función
 -- símbolosProposicionalesConjuntoCláusula :: [Cláusula] -> [Prop]
 -- tal que (símbolosProposicionalesConjuntoCláusula s) es el conjunto de los
 -- símbolos proposicionales de s. Por ejemplo,
@@ -105,7 +100,6 @@ uniónGeneral [símbolosProposicionalesCláusula c | c <- s]
 -- Interpretaciones de una cláusula --
 -- ---------------------------------------------------------------------
 -- ---------------------------------------------------------------------
--- Ejercicio 8: Definir la función
 -- interpretacionesCláusula :: Cláusula -> [Interpretación]
 -- tal que (interpretacionesCláusula c) es el conjunto de
 -- interpretaciones de c. Por ejemplo,
@@ -119,11 +113,9 @@ subconjuntos (símbolosProposicionalesCláusula c)
 -- Interpretaciones de un conjunto de cláusulas --
 -- ---------------------------------------------------------------------
 -- ---------------------------------------------------------------------
--- Ejercicio 9: Definir la función
 -- interpretacionesConjuntoCláusula :: [Cláusula] -> [Interpretación]
 -- tal que (interpretacionesConjuntoCláusula s) es el conjunto de
 -- interpretaciones de s. Por ejemplo,
-Capítulo 3. Cláusulas 33
 -- interpretacionesConjuntoCláusula [[p, no q],[no p, q]]
 -- ==> [[p,q],[p],[q],[]]
 -- interpretacionesConjuntoCláusula []
@@ -136,7 +128,6 @@ subconjuntos (símbolosProposicionalesConjuntoCláusula c)
 -- Modelos de cláusulas --
 -- ---------------------------------------------------------------------
 -- ---------------------------------------------------------------------
--- Ejercicio 10: Definir la función
 -- esModeloLiteral :: Interpretación -> Literal -> Bool
 -- tal que (esModeloLiteral i l) se verifica si i es modelo de l. Por
 -- ejemplo,
@@ -149,7 +140,6 @@ esModeloLiteral :: Interpretación -> Literal -> Bool
 esModeloLiteral i (Atom s) = elem (Atom s) i
 esModeloLiteral i (Neg (Atom s)) = notElem (Atom s) i
 -- ---------------------------------------------------------------------
--- Ejercicio 11: Definir la función
 -- esModeloCláusula :: Interpretación -> Cláusula -> Bool
 -- tal que (esModeloCláusula i c) se verifica si i es modelo de c . Por
 -- ejemplo,
@@ -158,12 +148,10 @@ esModeloLiteral i (Neg (Atom s)) = notElem (Atom s) i
 -- esModeloCláusula [q,r] [p, no q] ==> False
 -- esModeloCláusula [q,r] [] ==> False
 -- ---------------------------------------------------------------------
-34 Capítulo 3. Cláusulas
 esModeloCláusula :: Interpretación -> Cláusula -> Bool
 esModeloCláusula i c =
 or [esModeloLiteral i l | l <- c]
 -- ---------------------------------------------------------------------
--- Ejercicio 12: Definir la función
 -- modelosCláusula :: Cláusula -> [Interpretación]
 -- tal que (modelosCláusula c) es la lista de los modelos de c. Por
 -- ejemplo,
@@ -179,7 +167,6 @@ esModeloCláusula i c]
 -- Modelos de conjuntos de cláusulas --
 -- ---------------------------------------------------------------------
 -- ---------------------------------------------------------------------
--- Ejercicio 13: Definir la función
 -- esModeloConjuntoCláusulas :: Interpretación -> [Cláusula] -> Bool
 -- tal que (esModeloConjuntoCláusulas i c) se verifica si i es modelo de
 -- c. Por ejemplo,
@@ -191,9 +178,7 @@ esModeloConjuntoCláusulas :: Interpretación -> [Cláusula] -> Bool
 esModeloConjuntoCláusulas i s =
 and [esModeloCláusula i c | c <- s]
 -- ---------------------------------------------------------------------
--- Ejercicio 14: Definir la función
 -- modelosConjuntoCláusulas :: [Cláusula] -> [Interpretación]
-Capítulo 3. Cláusulas 35
 -- tal que (modelosConjuntoCláusulas s) es la lista de los modelos de
 -- s. Por ejemplo,
 -- modelosConjuntoCláusulas [[no p, q], [no q, p]]
@@ -208,10 +193,8 @@ modelosConjuntoCláusulas s =
 [i | i <- interpretacionesConjuntoCláusula s,
 esModeloConjuntoCláusulas i s]
 -- ---------------------------------------------------------------------
--- Cláusulas válidas, satisfacibles e insatisfacibles --
+-- Cláusulas válidas, satisfacible --
 -- ---------------------------------------------------------------------
--- ---------------------------------------------------------------------
--- Ejercicio 15: Definir la función
 -- esCláusulaVálida :: Cláusula -> Bool
 -- tal que (esCláusulaVálida c) se verifica si la cláusula c es
 -- válida. Por ejemplo,
@@ -227,23 +210,6 @@ esCláusulaVálida1 :: Cláusula -> Bool
 esCláusulaVálida1 c =
 and [esModeloCláusula i c | i <- interpretacionesCláusula c]
 -- ---------------------------------------------------------------------
--- Ejercicio 16: Definir la función
--- esCláusulaInsatisfacible :: Cláusula -> Bool
--- tal que (esCláusulaInsatisfacible c) se verifica si la cláusula c es
--- insatisfacible. Por ejemplo,
--- esCláusulaInsatisfacible [p, q, no p] ==> False
--- esCláusulaInsatisfacible [p, q, no r] ==> False
--- esCláusulaInsatisfacible [] ==> True
--- ---------------------------------------------------------------------
-esCláusulaInsatisfacible :: Cláusula -> Bool
-esCláusulaInsatisfacible c =
-null c
--- Definición alternativa:
-esCláusulaInsatisfacible1 :: Cláusula -> Bool
-esCláusulaInsatisfacible1 c =
-and [not (esModeloCláusula i c) | i <- interpretacionesCláusula c]
--- ---------------------------------------------------------------------
--- Ejercicio 17: Definir la función
 -- esCláusulaSatisfacible :: Cláusula -> Bool
 -- tal que (esCláusulaSatisfacible c) se verifica si la cláusula c es
 -- satisfacible. Por ejemplo,
